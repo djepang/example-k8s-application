@@ -2,7 +2,8 @@ name: kubernetes deployment
 on: [push]
 jobs:
     build-frontend:
-        runs-on: node:latest
+        runs-on: ubuntu-latest
+        container: node:latest
         steps:
             - run: |
                 cd frontend &&
