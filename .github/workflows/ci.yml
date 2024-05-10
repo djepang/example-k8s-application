@@ -3,8 +3,11 @@ on: [push]
 jobs:
     build-frontend:
         runs-on: ubuntu-latest
-        container: node:latest
+    
         steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js
+              uses: actions/setup-node@v4
             - run: |
                 cd frontend &&
                 npm install &&
