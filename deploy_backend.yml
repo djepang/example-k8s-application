@@ -17,3 +17,20 @@
       docker run -d -p 3000:3000 helenhaveloh/k8s-application
     args:
       executable: /bin/bash
+
+      tasks:
+    - name: Kopiere den Backend-Ordner auf die EC2-Instanz
+      synchronize:
+        src: ./backend
+        dest: /home/ec2-user/backend-ec2  
+        recursive: yes
+
+    - name: Führe npm install im Backend-Ordner aus
+      shell: npm install
+      args:
+        chdir: /home/ec2-user/backend-ec2/backend
+
+    - name: Starte die Anwendung mit npm run start
+      shell: npm run start
+      args:
+        chdir: /home/ec2-user/backend-ec2/backend
